@@ -60,9 +60,22 @@ v_mean, v_std, v_min, v_max, t_mean, t_max, t_rise, n_points
 | 7 | `code/verify_attribution.py` | the pre-registered intervention test that **falsified** the SHAP-derived causal inference → `results/verify_attribution.md` |
 | 8 | `code/make_figures.py` | regenerate the four figures (uses the vendored `code/figkit.py`) |
 | 9 | `code/seed_robustness.py` | **seed-robustness of the main table** — re-runs every cell with 10 independent random seeds → `results/seed_robustness.md` (Supplementary Material S4) |
+| 10 | `code/make_graphical_abstract.py` | **conceptual framework figure / Graphical Abstract** — three bands (Data / Design / Claims and evidence) with six numbered relations → `figures/graphical_abstract.pdf` + `.png` |
 
 Auxiliary: `filter_cycles.py` (the superseded v1 filter), `extract_features.py`,
 `diag_cycles.py`, `run_baseline.py`.
+
+**On `make_graphical_abstract.py`.** It carries three mechanical self-checks, and each one was
+added *after* a check had passed while the figure was in fact broken:
+
+1. **glyph coverage** — the first version used circled digits, which are absent from Arial's cmap
+   and would have rendered as empty boxes; figkit's spec check passed regardless.
+2. **layout** — the second version had overlapping boxes and text overflowing every frame; both
+   previous checks passed regardless.
+3. **figkit spec** — vector only, sans-serif, no Type3, minimum font size, page size.
+
+The general lesson is recorded with the script: *a spec check only tests the properties it
+declares, and silently passes everything it does not declare.*
 
 ### Running it
 
