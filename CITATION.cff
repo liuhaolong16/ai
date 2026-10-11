@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this code or the derived dataset, please cite the manuscript listed below."
+title: "Where cross-temperature generalization breaks: an interpretable machine-learning study of lithium-ion battery state-of-health from early-cycle features"
+type: software
+authors:
+  # TODO(before submission): replace with the real author list (family-names / given-names / orcid).
+  # The GitHub account is used here only as a placeholder so the file stays valid.
+  - name: "liuhaolong16"
+    alias: "liuhaolong16"
+repository-code: "https://github.com/liuhaolong16/ai"
+url: "https://github.com/liuhaolong16/ai"
+license: MIT
+keywords:
+  - lithium-ion battery
+  - state of health
+  - early-cycle prediction
+  - cross-temperature generalization
+  - interpretable machine learning
+  - SHAP attribution
+preferred-citation:
+  type: article
+  title: "Where cross-temperature generalization breaks: an interpretable machine-learning study of lithium-ion battery state-of-health from early-cycle features"
+  # TODO(before submission): fill in journal, volume, DOI and the author list once assigned.
+  journal: "Journal of Energy Storage"
+  authors:
+    - name: "liuhaolong16"

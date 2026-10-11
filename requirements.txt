@@ -1,0 +1,12 @@
+# Verified environment — these exact versions reproduced results/results_cv.md
+# Python 3.14.8
+numpy==2.5.3
+scipy==1.18.1
+xgboost==3.4.1
+shap==0.53.0
+matplotlib==3.11.2
+
+# Optional — only needed for the figure spec check in code/make_figures.py
+# (figkit.check_pdf_or_raise: no embedded bitmaps, sans-serif fonts, no Type3,
+#  minimum font size, page size). The figures themselves do not require it.
+pymupdf>=1.24
