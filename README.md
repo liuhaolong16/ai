@@ -59,6 +59,7 @@ v_mean, v_std, v_min, v_max, t_mean, t_max, t_rise, n_points
 | 6 | `code/find_failure_source.py` | 11 leave-one-feature-out experiments + temperature-feature intervention → `results/failure_source.md` |
 | 7 | `code/verify_attribution.py` | the pre-registered intervention test that **falsified** the SHAP-derived causal inference → `results/verify_attribution.md` |
 | 8 | `code/make_figures.py` | regenerate the four figures (uses the vendored `code/figkit.py`) |
+| 9 | `code/seed_robustness.py` | **seed-robustness of the main table** — re-runs every cell with 10 independent random seeds → `results/seed_robustness.md` (Supplementary Material S4) |
 
 Auxiliary: `filter_cycles.py` (the superseded v1 filter), `extract_features.py`,
 `diag_cycles.py`, `run_baseline.py`.
@@ -88,8 +89,10 @@ matplotlib 3.11.2 (see `requirements.txt`). The model is an `XGBRegressor` with 
 
 **Self-check.** Running `python code/model_cv.py` from a fresh clone reproduces
 `results/results_cv.md` **byte-for-byte** (identical SHA-256) from the deposited
-`data/filtered_v2.csv`. The deposit is therefore sufficient to reproduce the paper's headline
-numbers without the raw NASA download.
+`data/filtered_v2.csv`. Likewise `python code/seed_robustness.py` reproduces
+`results/seed_robustness.md` byte-for-byte (verified after the file was moved into this layout).
+The deposit is therefore sufficient to reproduce the paper's headline numbers without the raw NASA
+download.
 
 ---
 
@@ -143,7 +146,17 @@ by the `B0050` exclusion.
 `F1`, protocol B: **negative R² for every held-out temperature** — −4.459 (4 °C),
 −4.133 (24 °C), −8.002 (43 °C). A cliff, not a gradual decay.
 
-`F3`, protocol A at 24 °C rises to R² = 0.992 while protocol B still largely fails.
+**Seed stability (`results/seed_robustness.md`, Supplementary Material S4).** Over the same 10
+independent random seeds: for F1 the protocol-A value at 24 °C is **0.869 ± 0.005**
+(per-seed range 0.860–0.875) against the reported point estimate of 0.874, and **all 10 seeds are
+negative at every held-out temperature under protocol B** (4 °C −4.91…−4.20; 24 °C −6.09…−1.10;
+43 °C −11.10…−4.96). The headline conclusions are therefore not artefacts of a lucky seed.
+
+`F3`, protocol A at 24 °C rises to R² = 0.992. Its cross-temperature behaviour is **not uniformly
+negative**: 4 °C −0.412 ± 0.140 (10/10 seeds negative), 24 °C −0.132 ± 0.333 (**6/10** seeds
+negative — straddles zero), and 43 °C **+0.899 ± 0.070** (0/10 seeds negative — **succeeds**).
+The cross-temperature failure claim therefore applies strictly to the **indirect-feature sets
+F1 and F2**, not to F3.
 
 > ⚠ **Confounder, stated in the paper and repeated here:** in this dataset **temperature and
 > discharge rate are confounded**, so protocol B is more precisely a
